@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grazie - Giorgio Vernuccio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', Arial, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 3px;
+      background: #f59e0b;
+      margin: 0 auto 30px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.8rem;
+      color: #cbd5e1;
+      font-weight: 300;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator-circle {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .scroll-indicator-dot {
+      width: 4px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 2px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .content-section {
+      padding: 120px 30px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+    }
+
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-text {
+      font-size: 1.8rem;
+      line-height: 1.8;
+      color: #1e293b;
+      font-weight: 300;
+    }
+
+    .highlight {
+      color: #d97706;
+      font-weight: 400;
+    }
+
+    .divider-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .divider-line {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+    }
+
+    .thank-you-section {
+      padding: 120px 30px;
+      background: #f1f5f9;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+    }
+
+    .thank-you-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .thank-you-text {
+      font-size: 1.8rem;
+      line-height: 1.8;
+      color: #1e293b;
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+
+    .thank-you-divider {
+      width: 80px;
+      height: 3px;
+      background: #f59e0b;
+      margin: 0 auto 30px;
+    }
+
+    .future-text {
+      font-size: 1.5rem;
+      color: #475569;
+      font-weight: 300;
+    }
+
+    .signature-section {
+      padding: 80px 30px;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+      text-align: center;
+    }
+
+    .signature-dash {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .signature-name {
+      font-size: 2rem;
+      color: #1e293b;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .footer {
+      padding: 30px;
+      background: #0f172a;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .new-year-section {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .new-year-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease-out;
+    }
+
+    .new-year-content.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .new-year-title {
+      font-size: 4rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .new-year-year {
+      font-size: 6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .new-year-wish {
+      font-size: 1.5rem;
+      color: #cbd5e1;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+
+      .content-text,
+      .thank-you-text {
+        font-size: 1.3rem;
+      }
+
+      .future-text {
+        font-size: 1.2rem;
+      }
+
+      .content-section {
+        padding: 80px 20px;
+      }
+
+      .thank-you-section {
+        padding: 80px 20px;
+      }
+
+      .signature-name {
+        font-size: 1.6rem;
+      }
+
+      .new-year-title {
+        font-size: 2.5rem;
+      }
+
+      .new-year-year {
+        font-size: 4rem;
+      }
+
+      .new-year-wish {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Grazie</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-subtitle">Per questo anno insieme</p>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-circle">
+        <div class="scroll-indicator-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section 1 -->
+  <section class="content-section">
+    <div class="content-wrapper">
+      <p class="content-text">
+        Il tempo condiviso non è solo lavoro.</p>
+		<p class="content-text"> È <span class="highlight">FIDUCIA</span>, 
+        <span class="highlight">CRESCITA</span> e <span class="highlight">OBIETTIVI</span>
+        che prendono forma insieme.
+      </p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider-section">
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Content Section 2 -->
+  <section class="content-section">
+    <div class="content-wrapper">
+      <p class="content-text">
+        Un anno di sfide affrontate, idee trasformate in realtà e traguardi raggiunti 
+        <span class="highlight">passo dopo passo</span>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider-section">
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Content Section 3 -->
+  <section class="content-section">
+    <div class="content-wrapper">
+      <p class="content-text">
+        Il presente è fatto di <span class="highlight">collaborazione autentica</span>, 
+        <span class="highlight">visione condivisa</span> e scelte che guardano lontano.
+      </p>
+    </div>
+  </section>
+
+  <!-- Thank You Section -->
+  <section class="thank-you-section">
+    <div class="content-wrapper">
+      <p class="thank-you-text">
+        Grazie per la collaborazione, la fiducia e il cammino condiviso.
+      </p>
+      <div class="thank-you-divider"></div>
+      <p class="future-text">
+        Continuiamo insieme verso i prossimi traguardi.
+      </p>
+	  <p class="signature-name">Giorgio Vernuccio</p>
+    </div>
+  </section>
+
+
+
+  <!-- New Year Section with Fireworks -->
+  <section class="new-year-section">
+    <canvas id="fireworks"></canvas>
+    <div class="new-year-content">
+      <h2 class="new-year-title">Buon Anno!</h2>
+      <p class="new-year-year">2026</p>
+      <p class="new-year-wish">Che sia un anno straordinario</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 Giorgio Vernuccio
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in effects
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.content-section, .thank-you-section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Hide scroll indicator after scroll
+    let hasScrolled = false;
+    window.addEventListener('scroll', () => {
+      if (!hasScrolled && window.scrollY > 100) {
+        hasScrolled = true;
+        const indicator = document.querySelector('.scroll-indicator');
+        if (indicator) {
+          indicator.style.transition = 'opacity 0.5s';
+          indicator.style.opacity = '0';
+        }
+      }
+    });
+
+    // Fireworks animation
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let fireworks = [];
+    let particles = [];
+    let isFireworksActive = false;
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Firework {
+      constructor(x, y) {
+        this.x = x;
+        this.y = canvas.height;
+        this.targetY = y;
+        this.speed = 3;
+        this.hue = Math.random() * 360;
+        this.brightness = Math.random() * 30 + 70;
+      }
+
+      update() {
+        this.y -= this.speed;
+        return this.y <= this.targetY;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${this.hue}, 100%, ${this.brightness}%)`;
+        ctx.fill();
+      }
+    }
+
+    class Particle {
+      constructor(x, y, hue) {
+        this.x = x;
+        this.y = y;
+        this.hue = hue;
+        this.brightness = Math.random() * 30 + 70;
+        this.velocityX = (Math.random() - 0.5) * 8;
+        this.velocityY = (Math.random() - 0.5) * 8;
+        this.gravity = 0.08;
+        this.friction = 0.98;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.02 + 0.01;
+      }
+
+      update() {
+        this.velocityY += this.gravity;
+        this.velocityX *= this.friction;
+        this.velocityY *= this.friction;
+        this.x += this.velocityX;
+        this.y += this.velocityY;
+        this.alpha -= this.decay;
+        return this.alpha > 0;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${this.hue}, 100%, ${this.brightness}%)`;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function createParticles(x, y, hue) {
+      const particleCount = 50;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(x, y, hue));
+      }
+    }
+
+    function animate() {
+      if (!isFireworksActive) return;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Update and draw fireworks
+      for (let i = fireworks.length - 1; i >= 0; i--) {
+        const firework = fireworks[i];
+        firework.draw();
+        if (firework.update()) {
+          createParticles(firework.x, firework.y, firework.hue);
+          fireworks.splice(i, 1);
+        }
+      }
+
+      // Update and draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.draw();
+        if (!particle.update()) {
+          particles.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function launchFirework() {
+      if (!isFireworksActive) return;
+      
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.5;
+      fireworks.push(new Firework(x, y));
+      
+      setTimeout(launchFirework, Math.random() * 400 + 300);
+    }
+
+    // Observer for New Year section
+    const newYearObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isFireworksActive) {
+          isFireworksActive = true;
+          document.querySelector('.new-year-content').classList.add('visible');
+          animate();
+          launchFirework();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const newYearSection = document.querySelector('.new-year-section');
+    if (newYearSection) {
+      newYearObserver.observe(newYearSection);
+    }
+  </script>
+</body>
+</html>
