@@ -1232,7 +1232,7 @@ function renderQuoteResults() {
 function emailQuote() {
   var subject = encodeURIComponent('Richiesta Preventivo — Fiera Zagabria 2026');
   var body = encodeURIComponent(buildWAMsg().replace(/\*/g,''));
-  window.open('mailto:vivaicintolisrl@gmail.com?subject='+subject+'&body='+body);
+  window.('mailto:vivaicintolisrl@gmail.com?subject='+subject+'&body='+body);
 }
 
 function generatePDF() {
@@ -1539,8 +1539,8 @@ renderCatalog();
 ═══════════════════════════════════════ */
 
 // ⚠️ INSERISCI LE TUE API KEY QUI
-var MAPBOX_KEY = 'pk.eyJ1IjoiZ2l1b3giLCJhIjoiY2tkNW83MmpsMDlveTJ0cmFrZWxwNTdqNSJ9.L4h14eanVxYQzWQWV0FyRA'; // Mapbox access token — registrati gratis su mapbox.com (50K load/mese free)
-var OPENAI_KEY = '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'; // OpenAI API key — platform.openai.com (gpt-image-2, il più avanzato ad aprile 2026)
+var MAPBOX_KEY = ''; // Mapbox access token — registrati gratis su mapbox.com (50K load/mese free)
+var OPENAI_KEY = ''; // OpenAI API key — platform.openai.com (gpt-image-2, il più avanzato ad aprile 2026)
 
 var gvStep = 1;
 var gvSelectedStyle = 'mediterranean';
